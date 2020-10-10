@@ -1,0 +1,86 @@
+#Zadanie_nr2
+
+   SELECT * FROM TEAMS;
+
+#Zadanie_nr2
+
+   SELECT * FROM USERS;
+
+#Zadanie_nr3
+
+    SELECT 
+      LASTNAME,
+      SALARY_BASE*12 
+    FROM USERS;
+  
+#Zadanie_nr4
+  
+  
+    SELECT 
+    POSITION,
+    IFNULL(SALARY_ADD,"0")+SALARY_BASE AS "SUMMARIZED EARNS"
+    FROM USERS;
+    
+#Zadanie_nr5
+
+    SELECT * FROM TEAMS
+    ORDER BY NAME;
+
+#Zadanie_nr6
+
+    SELECT DISTINCT POSITION FROM USERS;
+  
+#Zadanie_nr7
+
+    SELECT * FROM USERS
+    WHERE POSITION="JUNIOR";
+  
+#Zadanie_nr8
+
+    SELECT * FROM USERS
+    ORDER BY 
+    LAST_NAME,
+    SALARY_BASE DESC;
+  
+#Zadanie_nr9
+
+    SELECT 
+    LOWER(POSITION) FROM USERS
+    ORDER BY POSITION;
+  
+#Zadanie_nr10
+
+    SELECT * FROM USERS
+    WHERE SALARY_ADD*12>SALARY_BASE*2;
+  
+#Zadanie_nr11
+
+    SELECT * FROM USERS
+    WHERE ID_USER>150;
+
+#Zadanie_nr12
+
+    SELECT LASTNAME FROM USERS
+    WHERE LASTNAME LIKE "%e_";
+
+#Zadanie_nr13
+
+    SELECT COUNT(DISTINCT lastname) AS L_NAZWISK FROM USERS
+    WHERE lastname LIKE "%n";
+    
+#Zadanie_nr14
+
+    SELECT * FROM USERS
+    WHERE LASTNAME LIKE "%r%";
+    
+#Zadanie_nr15
+
+    SELECT * FROM USERS
+    WHERE SALARY_BASE>=600 AND SALARY_BASE<1100;
+
+
+
+
+
+
+
