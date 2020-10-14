@@ -1,0 +1,54 @@
+----------------------------------------------------------------------------
+#Zadanie_01
+
+SELECT * FROM USERS
+WHERE ID_TEAM LIKE "40" OR ID_TEAM LIKE "30"
+ORDER BY SALARY_BASE DESC
+;
+
+----------------------------------------------------------------------------
+#Zadanie_03
+
+SELECT 
+	LASTNAME,
+	ID_BOSS,
+  SALARY_BASE
+FROM USERS
+WHERE SALARY_BASE > 1000 AND ID_BOSS IS NOT NULL
+;
+
+
+----------------------------------------------------------------------------
+#Zadanie_05
+
+SELECT
+LASTNAME,
+POSITION,
+SALARY_BASE,
+SALARY_BASE/160 AS GROSS
+
+FROM USERS
+
+WHERE POSITION != "JUNIOR"  AND 
+	    POSITION != "INTERN"  AND
+      POSITION != "REGULAR" AND
+      SALARY_BASE NOT BETWEEN 400 AND 800
+      
+ORDER BY SALARY_BASE/160
+;
+
+
+----------------------------------------------------------------------------
+#Zadanie_07
+
+SELECT
+CONCAT(LASTNAME," WORKS FROM ",HIRED_AT," AND EARNS ",SALARY_BASE) AS SENIORS
+FROM USERS
+ORDER BY SALARY_BASE DESC
+;
+
+
+
+
+
+
