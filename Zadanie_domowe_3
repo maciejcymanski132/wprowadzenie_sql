@@ -23,12 +23,31 @@ FROM USERS
 --------------------------------------------------------------------
 Zadanie_03
 
+SELECT
+	LASTNAME,
+	FIRSTNAME
+FROM USERS
+WHERE SUBSTR(LASTNAME,(LENGTH(LASTNAME) + 1) / 2) LIKE "%L%"
+ ;
 
 
 --------------------------------------------------------------------
 Zadanie_04
+
+
+SELECT
+	FIRSTNAME,
+	LASTNAME,
+	SALARY_BASE,
+	ROUND(SALARY_BASE * 0.15) + SALARY_BASE AS NEW_SALARY
+FROM USERS
+;
+
+
 --------------------------------------------------------------------
 Zadanie_05
+
+
 --------------------------------------------------------------------
 Zadanie_06
 --------------------------------------------------------------------
