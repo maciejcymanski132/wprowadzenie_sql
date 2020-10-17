@@ -48,8 +48,39 @@ FROM USERS
 Zadanie_05
 
 
+SELECT
+	FIRSTNAME,
+	LASTNAME,
+	ROUND(DATEDIFF("2021-01-01" , HIRED_AT)/365) AS YEARS,
+        DATEDIFF("2021-01-01" , HIRED_AT) AS DAYS
+FROM USERS;
+
+
+
+
 --------------------------------------------------------------------
 Zadanie_06
+
+
+SELECT
+    LASTNAME,
+    ID_TEAM,
+    DATE_FORMAT(HIRED_AT ,"%b | %d/%y")
+    FROM USERS
+    WHERE ID_TEAM = 20
+;
+      
 --------------------------------------------------------------------
 Zadanie_07
 
+SELECT 
+DAYNAME(SYSDATE());
+
+********
+SELECT 
+    FIRSTNAME,
+    LASTNAME,
+    SALARY_BASE,
+    ROUND((SALARY_BASE * 0.20) * POWER(1 + 0.1 ,10) , 2)  AS PROFIT
+    FROM USERS
+;
