@@ -1,0 +1,220 @@
+
+--------------------------------------------------------------------
+Zadanie_01
+
+
+
+SELECT 
+	NAME,
+  ADDRESS,
+	CASE
+		WHEN ADDRESS IS NOT NULL THEN 'USA'
+	  END AS COUNTRY
+
+FROM TEAMS ;
+
+
+--------------------------------------------------------------------
+Zadanie_02
+
+
+SELECT 
+	FIRSTNAME,
+  SALARY_BASE,
+	CASE
+		    WHEN SALARY_BASE < 480 THEN 'LESS THAN 480'
+        WHEN SALARY_BASE = 480 THEN 'EQUAL TO 480'
+        WHEN SALARY_BASE > 480 THEN 'MORE THAN 480'
+	END AS 'FUNCTION'
+
+FROM USERS ;
+
+
+
+--------------------------------------------------------------------
+Zadanie_03
+
+
+SELECT 
+DISTINCT POSITION,
+AVG(SALARY_BASE)
+FROM USERS
+GROUP BY POSITION
+ORDER BY AVG(SALARY_BASE) DESC;
+
+
+
+--------------------------------------------------------------------
+Zadanie_04
+
+
+SELECT MAX(SALARY_BASE) AS 'MAX SALARY',
+MIN(SALARY_BASE) AS 'MIN SALARY',
+MAX(SALARY_BASE)-MIN(SALARY_BASE) AS 'DIFFERENCE'
+FROM USERS;
+
+
+--------------------------------------------------------------------
+Zadanie_05
+
+
+SELECT  ID_TEAM, POSITION,
+MAX(SALARY_BASE)
+FROM USERS
+GROUP BY ID_TEAM,POSITION
+ORDER BY ID_TEAM;
+
+--------------------------------------------------------------------
+Zadanie_06
+
+
+SELECT COUNT(*) AS 'SENIORS' FROM USERS
+WHERE POSITION = 'SENIOR'
+;
+
+--------------------------------------------------------------------
+Zadanie_07
+
+
+SELECT ID_TEAM,
+SUM(SALARY_BASE + IFNULL(SALARY_ADD,0)) AS 'TOTAL INCOME'
+FROM USERS
+GROUP BY ID_TEAM;
+
+
+
+--------------------------------------------------------------------
+Zadanie_08
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------
+Zadanie_09
+
+
+SELECT ID_BOSS,
+MIN(SALARY_BASE)
+FROM USERS 
+GROUP BY ID_BOSS
+ORDER BY MIN(SALARY_BASE) DESC;
+
+
+--------------------------------------------------------------------
+Zadanie_10
+
+
+
+SELECT ID_TEAM,
+COUNT(ID_USER) AS 'NUMBER OF WORKERS'
+FROM USERS
+GROUP BY ID_TEAM
+ORDER BY COUNT(ID_USER);
+
+
+--------------------------------------------------------------------
+Zadanie_11
+
+
+SELECT ID_TEAM,
+COUNT(ID_USER) AS 'NUMBER OF WORKERS'
+FROM USERS
+GROUP BY ID_TEAM
+HAVING COUNT(ID_USER)>3
+ORDER BY COUNT(ID_USER)
+;
+
+
+--------------------------------------------------------------------
+Zadanie_12
+
+
+SELECT id_user, 
+COUNT(ID_USER) AS 'NUMBER OF COPIES'
+FROM USERS
+GROUP BY ID_USER
+HAVING COUNT(ID_USER) > 1;
+
+
+
+--------------------------------------------------------------------
+Zadanie_13
+
+SELECT POSITION,
+ROUND(AVG(SALARY_BASE) , 2) AS 'AVERAGE SALARY',
+COUNT(ID_USER) AS 'NUMBER OF WORKERS'
+FROM USERS
+WHERE YEAR(HIRED_AT)<2020
+GROUP BY POSITION
+;
+
+--------------------------------------------------------------------
+Zadanie_14
+
+SELECT COUNT(*)
+FROM USERS
+WHERE LOWER(LASTNAME) LIKE "%a%"
+
+;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
