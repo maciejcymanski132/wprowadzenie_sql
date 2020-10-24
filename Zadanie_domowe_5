@@ -1,0 +1,107 @@
+----------------------------------------------
+Zadanie_01
+
+
+
+SELECT LASTNAME,
+    POSITION,
+	ID_TEAM,
+    NAME
+	FROM USERS
+    JOIN TEAMS using(id_team)
+    ORDER BY position;
+    
+----------------------------------------------
+Zadanie_02
+
+SELECT  LASTNAME,
+		POSITION,
+		ID_TEAM,
+		NAME
+FROM USERS
+JOIN TEAMS USING(id_team)
+WHERE ADDRESS='NEW YORK CITY'
+ORDER BY position;
+
+
+----------------------------------------------
+Zadanie_03
+
+SELECT  FIRSTNAME,
+		LASTNAME,
+		POSITION,
+		SALARY_BASE,
+		SALARY_MAX,
+    SALARY_MIN
+FROM USERS
+JOIN POSITIONS ON POSITION=NAME
+ORDER BY POSITION,LASTNAME;
+		
+
+----------------------------------------------
+Zadanie_04
+
+SELECT p.LASTNAME AS WORKER,
+	     p.ID_USER,
+       p.ID_BOSS,
+       u.LASTNAME AS BOSS
+FROM USERS u
+JOIN USERS p ON u.id_user=p.id_boss
+ORDER BY p.ID_BOSS;
+
+----------------------------------------------
+Zadanie_05
+
+SELECT
+	  u.LASTNAME,
+    u.HIRED_AT,
+    p.HIRED_AT
+FROM USERS u
+JOIN USERS p ON u.id_boss=p.id_user
+WHERE DATEDIFF(u.HIRED_AT,p.HIRED_AT)<3650
+;
+
+----------------------------------------------
+Zadanie_06
+
+SELECT
+	  NAME,
+    COUNT(lastname) AS PEOPLE,
+    CASE
+		    WHEN COUNT(lastname)<= 2 THEN "SMALL"
+        WHEN COUNT(lastname) BETWEEN 3 AND 6 THEN "MEDIUM"
+        WHEN COUNT(lastname) >=7 THEN "BIG"
+        END AS "nice"
+		FROM USERS  
+    JOIN TEAMS USING(ID_TEAM)
+    GROUP BY ID_TEAM;
+----------------------------------------------
+Zadanie_07
+
+SELECT
+	  NAME,
+    COUNT(lastname) AS PEOPLE,
+    SUM(SALARY_BASE) AS SALARY
+	FROM USERS  
+  JOIN TEAMS USING(ID_TEAM)
+  GROUP BY ID_TEAM;
+----------------------------------------------
+Zadanie_08
+
+SELECT
+	p.FIRSTNAME,
+	p.LASTNAME,
+    IFNULL(COUNT(u.lastname),0) AS PEOPLE
+	  FROM USERS  u
+    RIGHT JOIN USERS  p ON u.id_boss=p.id_user
+    GROUP BY p.ID_USER
+    ;
+   
+----------------------------------------------
+Zadanie_09
+
+SELECT
+	COUNT(*)
+FROM USERS
+CROSS JOIN POSITIONS
+CROSS JOIN TEAMS;
