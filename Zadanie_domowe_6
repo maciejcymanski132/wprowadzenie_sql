@@ -1,0 +1,145 @@
+--------------------------------------------------------------------
+Zadanie_01
+
+A)
+
+SELECT
+LASTNAME,
+POSITION,
+ID_TEAM
+FROM USERS
+WHERE ID_TEAM=(SELECT
+ID_TEAM FROM USERS WHERE LASTNAME='KIRCKMAN')
+ORDER BY LASTNAME
+;
+
+
+B)
+
+SELECT
+LASTNAME,
+POSITION,
+NAME
+FROM USERS
+JOIN TEAMS USING(ID_TEAM)
+WHERE ID_TEAM=(SELECT
+ID_TEAM FROM USERS WHERE LASTNAME='KIRCKMAN')
+ORDER BY LASTNAME
+;
+
+
+--------------------------------------------------------------------
+Zadanie_02
+
+SELECT
+LASTNAME,
+POSITION,
+HIRED_AT
+FROM USERS
+WHERE (position,hired_at) = (SELECT POSITION,min(HIRED_AT) FROM USERS
+WHERE POSITION='SENIOR')
+;
+
+
+--------------------------------------------------------------------
+Zadanie_03
+
+SELECT * FROM USERS
+WHERE HIRED_AT in (SELECT MAX(HIRED_AT) FROM USERS GROUP BY ID_TEAM)
+GROUP BY ID_TEAM
+ORDER BY HIRED_AT;
+
+
+--------------------------------------------------------------------
+Zadanie_04
+
+
+SELECT * FROM TEAMS
+LEFT JOIN USERS USING(ID_TEAM)
+WHERE TEAMS.ID_TEAM NOT IN (SELECT ID_TEAM FROM USERS)
+
+;
+  
+--------------------------------------------------------------------
+Zadanie_05
+
+
+SELECT S.* FROM USERS P
+JOIN USERS S 
+ON S.ID_USER=P.ID_BOSS AND S.POSITION='senior'
+WHERE P.ID_BOSS NOT IN (SELECT ID_BOSS FROM USERS WHERE POSITION = 'INTERN')
+;
+--------------------------------------------------------------------
+Zadanie_06
+
+
+SELECT ID_TEAM FROM USERS 
+GROUP BY ID_TEAM
+ORDER BY SUM(SALARY_BASE) DESC LIMIT 1;
+
+LUB
+
+
+SELECT ID_TEAM FROM USERS
+GROUP BY ID_TEAM
+HAVING SUM(SALARY_BASE) >= ALL(SELECT SUM(SALARY_BASE) FROM USERS GROUP BY ID_TEAM);
+
+--------------------------------------------------------------------
+Zadanie_07
+
+SELECT NAME FROM USERS
+JOIN TEAMS USING(ID_TEAM)
+GROUP BY ID_TEAM
+HAVING SUM(SALARY_BASE) >= ALL(SELECT SUM(SALARY_BASE) FROM USERS GROUP BY ID_TEAM);
+
+--------------------------------------------------------------------
+Zadanie_08
+
+SELECT NAME,COUNT(ID_USER) AS 'LICZBA PRACOWNIKOW' FROM USERS
+JOIN TEAMS USING(ID_TEAM)
+GROUP BY ID_TEAM
+HAVING COUNT(ID_USER) > (SELECT COUNT(ID_USER) FROM USERS join teams using(id_team) WHERE NAME='ADMINISTRATION');
+
+
+--------------------------------------------------------------------
+Zadanie_09
+
+9A
+
+
+SELECT POSITION,COUNT(*) FROM USERS
+GROUP BY POSITION
+HAVING COUNT(*) >= ALL(SELECT COUNT(*) FROM USERS GROUP BY POSITION) 
+
+;
+
+
+9B 
+
+SELECT POSITION,COUNT(*),GROUP_CONCAT(LASTNAME) FROM USERS
+GROUP BY POSITION
+HAVING COUNT(*) >= ALL(SELECT COUNT(*) FROM USERS GROUP BY POSITION) 
+
+;
+
+
+--------------------------------------------------------------------
+Zadanie_10
+
+
+SELECT s.LASTNAME as 'pracownik',
+s.salary_base,
+p.lastname as 'szef',
+p.salary_base,
+p.salary_base-s.salary_base as 'difference'
+FROM USERS p
+JOIN USERS s ON p.id_user = s.id_boss
+WHERE p.salary_base - s.salary_base = 
+(
+SELECT min(p.salary_base-s.salary_base) 
+FROM USERS p 
+JOIN USERS s ON p.id_user = s.id_boss
+)
+
+;
+
